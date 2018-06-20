@@ -150,7 +150,7 @@ func main() {
 	app.LongDesc = "long desc goes here"
 
 	app.Command("dump", "Dump a table to file or S3", func(cmd *cli.Cmd) {
-		cmd.Spec = "[-cmpr] [--filename | --stdout] [(--s3-bucket --s3-prefix)] TABLENAME"
+		cmd.Spec = "[-cmpr] [--endpoint] [--filename | --stdout] [(--s3-bucket --s3-prefix)] TABLENAME"
 		action := &dumper{
 			tableName:      cmd.StringArg("TABLENAME", "", "Table name to dump from Dynamo"),
 			consistentRead: cmd.BoolOpt("c consistent-read", false, "Enable consistent reads (at 2x capacity use)"),
@@ -161,6 +161,7 @@ func main() {
 			readCapacity:   cmd.IntOpt("r read-capacity", 5, "Average aggregate read capacity to use for scan (set to 0 for unlimited)"),
 			s3BucketName:   cmd.StringOpt("s3-bucket", "", "S3 bucket name to upload to"),
 			s3Prefix:       cmd.StringOpt("s3-prefix", "", `Path prefix to use to store data in S3 (eg. "backups/2016-04-01-12:25-")`),
+			endpoint:       cmd.StringOpt("endpoint", "", "Custom endpoint for DynamoDB"),
 		}
 
 		cmd.Before = func() {
@@ -177,7 +178,7 @@ func main() {
 	})
 
 	app.Command("load", "Load a table dump from S3 or file to a DynamoDB table", func(cmd *cli.Cmd) {
-		cmd.Spec = "[-mpw] [--allow-overwrite] (--filename | --stdin | (--s3-bucket --s3-prefix)) TABLENAME"
+		cmd.Spec = "[-mpw] [--allow-overwrite] [--endpoint] (--filename | --stdin | (--s3-bucket --s3-prefix)) TABLENAME"
 		action := &loader{
 			tableName:      cmd.StringArg("TABLENAME", "", "Table name to load into"),
 			allowOverwrite: cmd.BoolOpt("allow-overwrite", false, "Set to true to overwrite any existing rows"),
@@ -188,6 +189,7 @@ func main() {
 			writeCapacity:  cmd.IntOpt("w write-capacity", 5, "Average aggregate write capacity to use for load (set to 0 for unlimited)"),
 			s3BucketName:   cmd.StringOpt("s3-bucket", "", "S3 bucket name to read from"),
 			s3Prefix:       cmd.StringOpt("s3-prefix", "", `Path prefix to use to read data from S3 (eg. "backups/2016-04-01-12:25-")`),
+			endpoint:       cmd.StringOpt("endpoint", "", "Custom endpoint for DynamoDB"),
 		}
 
 		cmd.Before = func() {

@@ -37,10 +37,16 @@ type loader struct {
 	writeCapacity  *int
 	s3BucketName   *string
 	s3Prefix       *string
+	endpoint       *string
 }
 
 func (ld *loader) init() error {
-	ld.dyn = dynamodb.New(session.New())
+	config := aws.NewConfig()
+	if *ld.endpoint != "" {
+		config = config.WithEndpoint(*ld.endpoint).WithDisableSSL(true)
+	}
+
+	ld.dyn = dynamodb.New(session.New(), config)
 	resp, err := ld.dyn.DescribeTable(&dynamodb.DescribeTableInput{
 		TableName: ld.tableName,
 	})

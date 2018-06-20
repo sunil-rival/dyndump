@@ -77,6 +77,7 @@ type dumper struct {
 	readCapacity   *int
 	s3BucketName   *string
 	s3Prefix       *string
+	endpoint       *string
 }
 
 func (d *dumper) openS3Writer() (*dyndump.S3Writer, error) {
@@ -151,7 +152,12 @@ func (d *dumper) openWriters() *writers {
 }
 
 func (d *dumper) init() error {
-	d.dyn = dynamodb.New(session.New())
+	config := aws.NewConfig()
+	if *d.endpoint != "" {
+		config = config.WithEndpoint(*d.endpoint).WithDisableSSL(true)
+	}
+
+	d.dyn = dynamodb.New(session.New(), config)
 	resp, err := d.dyn.DescribeTable(&dynamodb.DescribeTableInput{
 		TableName: d.tableName,
 	})
