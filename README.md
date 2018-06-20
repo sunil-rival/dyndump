@@ -6,7 +6,7 @@
 This utility performs a full scan of an AWS DynamoDB table and outputs each
 row as a JSON object, storing the dump either on disk or in an S3 bucket.
 
-It supports rate-limiting to a specified average read or write capacity and 
+It supports rate-limiting to a specified average read or write capacity and
 parallel requests to achieve high throughput.
 
 The underlying Go library can also be imported into other projects to provide
@@ -19,7 +19,7 @@ Binaries are available for Linux, Solaris, Windows and Mac for the
 
 ## Compile
 
-[Install Go](https://golang.org/doc/install) and run 
+[Install Go](https://golang.org/doc/install) and run
 `go get github.com/gwatts/dyndump`.
 
 ## Utility Usage
@@ -56,6 +56,7 @@ Options:
   --s3-prefix=""                Path prefix to use to store data in S3 (eg. "backups/2016-04-01-12:25-")
   --silent=false                Set to true to disable all non-error output
   --no-progress=false           Set to true to disable the progress bar
+  --endpoint=""                 Custom endpoint for DynamoDB
 ```
 
 ### Load
@@ -82,6 +83,7 @@ Options:
   --s3-prefix=""            Path prefix to use to read data from S3 (eg. "backups/2016-04-01-12:25-")
   --silent=false            Set to true to disable all non-error output
   --no-progress=false       Set to true to disable the progress bar
+  --endpoint=""             Custom endpoint for DynamoDB
 ```
 
 ### Info

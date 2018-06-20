@@ -47,7 +47,7 @@ dyndump supports four commands:
 
 DUMP
 
-  Usage: dyndump dump [--silent] [--no-progress] [-cmpr] [--filename | --stdout] [(--s3-bucket --s3-prefix)] TABLENAME
+  Usage: dyndump dump [--silent] [--endpoint] [--no-progress] [-cmpr] [--filename | --stdout] [(--s3-bucket --s3-prefix)] TABLENAME
 
   Dump a table to file or S3
 
@@ -65,11 +65,12 @@ DUMP
     --s3-prefix=""                Path prefix to use to store data in S3 (eg. "backups/2016-04-01-12:25-")
     --silent=false                Set to true to disable all non-error output
     --no-progress=false           Set to true to disable the progress bar
+    --endpoint=""                 Custom endpoint for DynamoDB
 
 
 LOAD
 
-  Usage: dyndump load [--silent] [--no-progress] [-mpw] (--filename | --stdin | (--s3-bucket --s3-prefix)) TABLENAME
+  Usage: dyndump load [--silent] [--endpoint] [--no-progress] [-mpw] (--filename | --stdin | (--s3-bucket --s3-prefix)) TABLENAME
 
   Load a table dump from S3 or file to a DynamoDB table
 
@@ -87,6 +88,7 @@ LOAD
     --s3-prefix=""            Path prefix to use to read data from S3 (eg. "backups/2016-04-01-12:25-")
     --silent=false            Set to true to disable all non-error output
     --no-progress=false       Set to true to disable the progress bar
+    --endpoint=""             Custom endpoint for DynamoDB
 
 
 INFO
