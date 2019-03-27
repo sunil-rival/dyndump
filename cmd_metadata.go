@@ -10,7 +10,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/gwatts/dyndump/dyndump"
+	"github.com/sunil-rival/dyndump/dyndump"
 )
 
 var metadataTmpl = template.Must(template.New("md").Parse(`

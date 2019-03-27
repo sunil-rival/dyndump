@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/cheggaaa/pb"
-	"github.com/gwatts/dyndump/dyndump"
+	"github.com/sunil-rival/dyndump/dyndump"
 )
 
 type deleter struct {

@@ -15,7 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/cheggaaa/pb"
-	"github.com/gwatts/dyndump/dyndump"
+	"github.com/sunil-rival/dyndump/dyndump"
 )
 
 type loader struct {
